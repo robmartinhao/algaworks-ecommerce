@@ -1,12 +1,10 @@
 package com.algaworks.ecommerce.util;
 
+import com.algaworks.ecommerce.model.Produto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.*;
 
 public class ConsultandoRegistrosTest {
 
@@ -16,7 +14,7 @@ public class ConsultandoRegistrosTest {
 
     @BeforeClass
     public static void setUpBeforeClass() {
-    entityManagerFactory = Persistence.createEntityManagerFactory("Ecommerce-PU");
+        entityManagerFactory = Persistence.createEntityManagerFactory("Ecommerce-PU");
     }
 
     @AfterClass
@@ -32,5 +30,23 @@ public class ConsultandoRegistrosTest {
     @After
     public void tearDown() {
         entityManager.close();
+    }
+
+    @Test
+    public void buscarPorIdentificador() {
+        Produto produto = entityManager.find(Produto.class, 1);
+
+        Assert.assertNotNull(produto);
+        Assert.assertEquals("Kindle", produto.getNome());
+    }
+
+    @Test
+    public void atualizarAReferencia() {
+        Produto produto = entityManager.find(Produto.class, 1);
+        produto.setNome("Microfone Samson");
+
+        entityManager.refresh(produto);
+
+        Assert.assertEquals("Kindle", produto.getNome());
     }
 }
