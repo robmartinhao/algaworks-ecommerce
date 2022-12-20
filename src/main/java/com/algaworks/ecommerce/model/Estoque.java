@@ -1,21 +1,21 @@
 package com.algaworks.ecommerce.model;
 
-import com.algaworks.ecommerce.model.enums.SexoCliente;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Cliente {
+public class Estoque {
 
     @EqualsAndHashCode.Include
     @Id
     private Integer id;
-    private String nome;
-    private SexoCliente sexo;
+    private Integer produtoId;
+    private Integer quantidade;
 }
