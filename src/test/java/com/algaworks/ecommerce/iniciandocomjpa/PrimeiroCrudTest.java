@@ -39,6 +39,14 @@ public class PrimeiroCrudTest extends EntityManagerTest {
     }
 
     @Test
+    public void buscaCliente() {
+        Cliente cliente = entityManager.find(Cliente.class, 1);
+
+        Assert.assertEquals(1, cliente.getId().intValue());
+        Assert.assertEquals("Osvaldo", cliente.getNome());
+    }
+
+    @Test
     public void removeCliente() {
         Cliente cliente = entityManager.find(Cliente.class, 2);
 
