@@ -1,9 +1,7 @@
 package com.algaworks.ecommerce.model;
 
 import com.algaworks.ecommerce.model.enums.SexoCliente;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +19,6 @@ public class Cliente {
 
     private String nome;
 
+    @Enumerated(EnumType.STRING)
     private SexoCliente sexo;
 }
