@@ -69,12 +69,12 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
         produto.setPreco(new BigDecimal(1000));
 
         entityManager.getTransaction().begin();
-        entityManager.merge(produto);
+        Produto produtoSalvo = entityManager.merge(produto);
         entityManager.getTransaction().commit();
 
         entityManager.clear();
 
-        Produto produtoVerficacao = entityManager.find(Produto.class, produto.getId());
+        Produto produtoVerficacao = entityManager.find(Produto.class, produtoSalvo.getId());
         Assert.assertNotNull(produtoVerficacao);
     }
 
@@ -100,12 +100,12 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
         produto.setPreco(new BigDecimal(599));
 
         entityManager.getTransaction().begin();
-        entityManager.merge(produto);
+        Produto produtoSalvo = entityManager.merge(produto);
         entityManager.getTransaction().commit();
 
         entityManager.clear();
 
-        Produto produtoVerficacao = entityManager.find(Produto.class, produto.getId());
+        Produto produtoVerficacao = entityManager.find(Produto.class, produtoSalvo.getId());
         Assert.assertNotNull(produtoVerficacao);
         Assert.assertEquals("Kindle Paperwhite", produtoVerficacao.getNome());
         Assert.assertEquals(new BigDecimal(599), produto.getPreco());
