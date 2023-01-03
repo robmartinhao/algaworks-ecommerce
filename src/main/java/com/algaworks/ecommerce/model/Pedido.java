@@ -38,6 +38,8 @@ public class Pedido {
 
     @Column(name = "nota_fiscal_id")
     private Integer notaFiscalId;
+    @OneToOne(mappedBy = "pedido")
+    private PagamentoCartao pagamento;
 
     private BigDecimal total;
 
