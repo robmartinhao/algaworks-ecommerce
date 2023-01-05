@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
@@ -23,7 +24,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne/*(fetch = FetchType.LAZY)*/
+    @ManyToOne(optional = false)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
