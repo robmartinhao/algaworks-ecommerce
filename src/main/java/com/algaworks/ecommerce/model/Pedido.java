@@ -23,11 +23,11 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne/*(fetch = FetchType.LAZY)*/
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido"/*, fetch = FetchType.EAGER*/)
     private List<ItemPedido> itens;
 
     @Column(name = "data_pedido")
