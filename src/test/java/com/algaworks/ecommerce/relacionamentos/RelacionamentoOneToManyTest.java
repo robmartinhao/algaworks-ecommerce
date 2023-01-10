@@ -1,10 +1,7 @@
 package com.algaworks.ecommerce.relacionamentos;
 
 import com.algaworks.ecommerce.EntityManagerTest;
-import com.algaworks.ecommerce.model.Cliente;
-import com.algaworks.ecommerce.model.ItemPedido;
-import com.algaworks.ecommerce.model.Pedido;
-import com.algaworks.ecommerce.model.Produto;
+import com.algaworks.ecommerce.model.*;
 import com.algaworks.ecommerce.model.enums.StatusPedido;
 import org.junit.Assert;
 import org.junit.Test;
@@ -47,6 +44,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
         pedido.setCliente(cliente);
 
         ItemPedido itemPedido = new ItemPedido();
+        itemPedido.setId(new ItemPedidoId());
         itemPedido.setPrecoProduto(produto.getPreco());
         itemPedido.setQuantidade(1);
         itemPedido.setPedido(pedido);
