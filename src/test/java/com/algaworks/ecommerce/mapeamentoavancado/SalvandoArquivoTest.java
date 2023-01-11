@@ -29,8 +29,8 @@ public class SalvandoArquivoTest extends EntityManagerTest {
         entityManager.getTransaction().commit();
 
         NotaFiscal notaFiscalverificacao = entityManager.find(NotaFiscal.class, notaFiscal.getId());
-        Assert.assertNotNull(notaFiscal.getXml());
-        Assert.assertTrue(notaFiscal.getXml().length > 0);
+        Assert.assertNotNull(notaFiscalverificacao.getXml());
+        Assert.assertTrue(notaFiscalverificacao.getXml().length > 0);
 
 //        try {
 //            OutputStream outputStream = new FileOutputStream(Files.createFile(Paths.get(
