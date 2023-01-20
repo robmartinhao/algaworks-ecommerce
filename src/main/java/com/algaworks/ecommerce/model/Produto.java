@@ -19,7 +19,7 @@ import java.util.List;
 )
 public class Produto extends EntidadeBaseInteger {
 
-    @Column(name = "data_criacao", updatable = false)
+    @Column(name = "data_criacao", updatable = false, nullable = false)
     private LocalDateTime dataCriacao;
 
     @Column(name = "data_ultima_atualizacao", insertable = false)
@@ -28,7 +28,7 @@ public class Produto extends EntidadeBaseInteger {
     @Column(length = 100, nullable = false) // nome varchar(100) not null
     private String nome;
 
-    @Column(columnDefinition = "varchar(275) not null default 'descrição'")
+    @Column(columnDefinition = "varchar(275) default 'descrição'")
     private String descricao;
 
     private BigDecimal preco;

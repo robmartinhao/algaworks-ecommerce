@@ -5,6 +5,7 @@ import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.Pagamento;
 import com.algaworks.ecommerce.model.PagamentoCartao;
 import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.enums.SexoCliente;
 import com.algaworks.ecommerce.model.enums.StatusPagamento;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,6 +18,8 @@ public class HerancaTest extends EntityManagerTest {
     public void salvarCliente() {
         Cliente cliente = new Cliente();
         cliente.setNome("Fernanda Morais");
+        cliente.setCpf("777777777");
+        cliente.setSexo(SexoCliente.FEMININO);
 
         entityManager.getTransaction().begin();
         entityManager.persist(cliente);
