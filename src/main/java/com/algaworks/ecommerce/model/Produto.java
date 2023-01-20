@@ -31,7 +31,6 @@ public class Produto extends EntidadeBaseInteger {
     @Column(columnDefinition = "varchar(275) not null default 'descrição'")
     private String descricao;
 
-    @Column(precision = 10, scale = 2) // preco decimal(10,2)
     private BigDecimal preco;
 
     @ManyToMany
@@ -49,7 +48,7 @@ public class Produto extends EntidadeBaseInteger {
 
     @ElementCollection
     @CollectionTable(name = "produto_tag", joinColumns = @JoinColumn(name = "produtoId"))
-    @Column(name = "tag")
+    @Column(name = "tag", length = 50, nullable = false)
     private List<String> tags;
 
     @ElementCollection
