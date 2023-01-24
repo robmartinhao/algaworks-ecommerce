@@ -19,12 +19,12 @@ import java.util.List;
 @EntityListeners({GerarNotaFiscalListener.class, GenericoListener.class})
 public class Pedido extends EntidadeBaseInteger {
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false/*, cascade = CascadeType.PERSIST*/)
     @JoinColumn(name = "cliente_id", nullable = false,
         foreignKey = @ForeignKey(name = "fk_pedido_cliente"))
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "pedido"/*, fetch = FetchType.EAGER*/)
+    @OneToMany(mappedBy = "pedido"/*, cascade = CascadeType.PERSIST*/)
     private List<ItemPedido> itens;
 
     @Column(name = "data_criacao", updatable = false , nullable = false)
