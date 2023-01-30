@@ -18,3 +18,5 @@ insert into pagamento (pedido_id, status, numero_cartao, tipo_pagamento) values 
 
 insert into categoria (id, nome) values (1, 'Eletrônicos');
 insert into categoria (id, nome) values (2, 'Livros');
+
+insert into produto_categoria (produto_id, categoria_id) values (1, 2);
