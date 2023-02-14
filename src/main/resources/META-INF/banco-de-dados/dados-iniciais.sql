@@ -17,6 +17,8 @@ insert into item_pedido (pedido_id, produto_id, preco_produto, quantidade) value
 
 insert into pagamento (pedido_id, status, numero_cartao, tipo_pagamento) values (2, 'PROCESSANDO', '123', 'cartao');
 
+insert into nota_fiscal (pedido_id, xml, data_emissao) values (2, '<xml />', sysdate());
+
 insert into categoria (id, nome) values (1, 'Eletrônicos');
 insert into categoria (id, nome) values (2, 'Livros');
 
