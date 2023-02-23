@@ -12,6 +12,20 @@ import java.util.TimeZone;
 public class FuncoesTest extends EntityManagerTest {
 
     @Test
+    public void aplicarFuncaoAgregacao() {
+        //avg, count, min, max, sum
+
+        String jpql = "select sum(p.total) from Pedido p";
+
+        TypedQuery<Number> typedQuery = entityManager.createQuery(jpql, Number.class);
+
+        List<Number> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(System.out::println);
+    }
+
+    @Test
     public void aplicarFuncoesNativas() {
 
 //        String jpql = "select p from Pedido p where function('acima_media_faturamento', p.total) = 1";
