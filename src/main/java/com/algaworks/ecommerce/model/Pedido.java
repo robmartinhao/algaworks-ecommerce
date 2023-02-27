@@ -40,7 +40,7 @@ public class Pedido extends EntidadeBaseInteger {
     private NotaFiscal notaFiscal;
 
     @OneToOne(mappedBy = "pedido")
-    private PagamentoCartao pagamento;
+    private Pagamento pagamento;
 
     @Column(nullable = false)
     private BigDecimal total;
