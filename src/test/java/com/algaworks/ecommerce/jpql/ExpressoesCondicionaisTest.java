@@ -9,9 +9,24 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 public class ExpressoesCondicionaisTest extends EntityManagerTest {
+
+    @Test
+    public void usarExpressaoIN() {
+
+        final List<Integer> parametros = Arrays.asList(1, 3, 4);
+
+        final String jpql = "select p from Pedido p where p.id in (:lista)";
+
+        TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+        typedQuery.setParameter("lista", parametros);
+
+        List<Pedido> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+    }
 
     @Test
     public void usarExpressaoCase() {
