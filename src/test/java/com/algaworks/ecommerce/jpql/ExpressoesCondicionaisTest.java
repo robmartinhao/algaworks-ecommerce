@@ -15,6 +15,22 @@ import java.util.List;
 public class ExpressoesCondicionaisTest extends EntityManagerTest {
 
     @Test
+    public void usarDistinct() {
+
+        final String jpql = "select distinct p from Pedido p " +
+                "join p.itens i " +
+                "join i.produto pro " +
+                "where p.id in (1, 2, 3, 4)";
+
+        TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+
+        List<Pedido> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        System.out.println(lista.size());
+    }
+
+    @Test
     public void usarExpressaoIN() {
 
         final List<Integer> parametros = Arrays.asList(1, 3, 4);
