@@ -34,3 +34,7 @@ insert into categoria (id, nome) values (5, 'Natação');
 insert into categoria (id, nome) values (6, 'Notebooks');
 insert into categoria (id, nome) values (7, 'Smartphones');
 insert into categoria (id, nome) values (8, 'Câmeras');
+
+insert into produto_categoria (produto_id, categoria_id) values (1, 2);
+insert into produto_categoria (produto_id, categoria_id) values (3, 8);
+insert into produto_categoria (produto_id, categoria_id) values (4, 8);
