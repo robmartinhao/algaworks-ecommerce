@@ -13,6 +13,27 @@ import java.util.List;
 public class SubqueriesTest extends EntityManagerTest {
 
     @Test
+    public void pesquisarComAny() {
+
+        // Todos os produtos já foram vendidos por um preço diferente do atual
+        String jpql = "select p from Produto p where " +
+                "p.preco <> ANY " +
+//                "ou SOME no lugar do ANY" +
+                " (select precoProduto from ItemPedido  where produto = p)";
+
+        // Todos os produtos que já foram vendidos, pelo menos, uma vez pelo preço atual
+//        String jpql = "select p from Produto p where " +
+//                "p.preco = ANY (select precoProduto from ItemPedido where produto = p)";
+
+        TypedQuery<Produto> typedQuery = entityManager.createQuery(jpql, Produto.class);
+
+        List<Produto> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(obj -> System.out.println("ID: " + obj.getId()));
+    }
+
+    @Test
     public void pesquisarComAll() {
 
         // Todos os produtos não foram vendidos mais depois que encarecem
