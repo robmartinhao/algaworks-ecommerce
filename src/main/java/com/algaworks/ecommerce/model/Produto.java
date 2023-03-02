@@ -14,9 +14,14 @@ import java.util.List;
 @EntityListeners(GenericoListener.class)
 @Entity
 @Table(name = "produto",
-    uniqueConstraints = { @UniqueConstraint(name = "unq_nome", columnNames ={ "nome"} ) },
-    indexes = { @Index(name = "idx_nome", columnList = "nome") }
+        uniqueConstraints = {@UniqueConstraint(name = "unq_nome", columnNames = {"nome"})},
+        indexes = {@Index(name = "idx_nome", columnList = "nome")}
 )
+@NamedQueries({
+        @NamedQuery(name = "Produto.listar", query = "select p from Produto p"),
+        @NamedQuery(name = "Produto.listarPorCategoria", query = "select p from Produto p " +
+                "where exists (select 1 from Categoria c2 join c2.produtos p2 where p2 = p and c2.id = :categoria)")
+})
 public class Produto extends EntidadeBaseInteger {
 
     @Column(name = "data_criacao", updatable = false, nullable = false)
