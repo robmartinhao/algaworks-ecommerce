@@ -16,6 +16,34 @@ import java.util.List;
 public class ExpressoesCondicionaisCriteriaTest extends EntityManagerTest {
 
     @Test
+    public void usarBetween() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Pedido> criteriaQuery = criteriaBuilder.createQuery(Pedido.class);
+        Root<Pedido> root = criteriaQuery.from(Pedido.class);
+
+        criteriaQuery.select(root);
+
+//        criteriaQuery.where(
+//                criteriaBuilder.between(
+//                        root.get(Pedido_.total),
+//                        new BigDecimal(499), new BigDecimal(2398))
+//        );
+
+        criteriaQuery.where(
+                criteriaBuilder.between(
+                        root.get(Pedido_.dataCriacao),
+                        LocalDateTime.now().minusDays(5), LocalDateTime.now())
+        );
+
+        TypedQuery<Pedido> typedQuery = entityManager.createQuery(criteriaQuery);
+        List<Pedido> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(p -> System.out.println(p.getId() + " - " + p.getTotal() + " = " + p.getDataCriacao()));
+
+    }
+
+    @Test
     public void usarMaiorMenorComDatas() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Pedido> criteriaQuery = criteriaBuilder.createQuery(Pedido.class);
