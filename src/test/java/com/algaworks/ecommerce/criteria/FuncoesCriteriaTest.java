@@ -16,6 +16,33 @@ import java.util.List;
 public class FuncoesCriteriaTest extends EntityManagerTest {
 
     @Test
+    public void aplicarFuncaoNativa() {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
+        Root<Pedido> root = criteriaQuery.from(Pedido.class);
+
+        criteriaQuery.multiselect(
+                root.get(Pedido_.id),
+                criteriaBuilder.function("dayname", String.class, root.get(Pedido_.dataCriacao))
+        );
+
+        criteriaQuery.where(criteriaBuilder.isTrue(
+                criteriaBuilder.function(
+                        "acima_media_faturamento", Boolean.class, root.get(Pedido_.total))));
+
+        TypedQuery<Object[]> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        List<Object[]> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(arr -> System.out.println(
+                arr[0] + "\n"
+                        + " dayname: " + arr[1]
+        ));
+    }
+
+    @Test
     public void aplicarFuncaoColecao() {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -37,7 +64,7 @@ public class FuncoesCriteriaTest extends EntityManagerTest {
 
         lista.forEach(arr -> System.out.println(
                 arr[0] + "\n"
-                        + " size: " + arr[1] + "\n"
+                        + " size: " + arr[1]
         ));
     }
 
@@ -67,7 +94,7 @@ public class FuncoesCriteriaTest extends EntityManagerTest {
                 arr[0] + "\n"
                         + " abs: " + arr[1] + "\n"
                         + " mod: " + arr[2] + "\n"
-                        + " sqrt: " + arr[3] + "\n"
+                        + " sqrt: " + arr[3]
         ));
     }
 
@@ -105,7 +132,7 @@ public class FuncoesCriteriaTest extends EntityManagerTest {
                 arr[0] + "\n"
                 + " current_date: " + arr[1] + "\n"
                 + " current_time: " + arr[2] + "\n"
-                + " current_timestamp: " + arr[3] + "\n"
+                + " current_timestamp: " + arr[3]
         ));
     }
 
