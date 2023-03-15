@@ -16,6 +16,38 @@ import java.util.List;
 public class FuncoesCriteriaTest extends EntityManagerTest {
 
     @Test
+    public void aplicarFuncaoAgregacao() {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
+        Root<Pedido> root = criteriaQuery.from(Pedido.class);
+
+        criteriaQuery.multiselect(
+                criteriaBuilder.count(root.get(Pedido_.id)),
+                criteriaBuilder.avg(root.get(Pedido_.total)),
+                criteriaBuilder.sum(root.get(Pedido_.total)),
+                criteriaBuilder.min(root.get(Pedido_.total)),
+                criteriaBuilder.max(root.get(Pedido_.total))
+        );
+
+        criteriaQuery.where(criteriaBuilder.greaterThan(
+                criteriaBuilder.sqrt(root.get(Pedido_.total)), 10.0));
+
+        TypedQuery<Object[]> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        List<Object[]> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(arr -> System.out.println(
+                " count: " + arr[0] + "\n"
+                        + " avg: " + arr[1] + "\n"
+                        + " sum: " + arr[2] + "\n"
+                        + " min: " + arr[3] + "\n"
+                        + " max: " + arr[4] + "\n"
+        ));
+    }
+
+    @Test
     public void aplicarFuncaoNativa() {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -130,9 +162,9 @@ public class FuncoesCriteriaTest extends EntityManagerTest {
 
         lista.forEach(arr -> System.out.println(
                 arr[0] + "\n"
-                + " current_date: " + arr[1] + "\n"
-                + " current_time: " + arr[2] + "\n"
-                + " current_timestamp: " + arr[3]
+                        + " current_date: " + arr[1] + "\n"
+                        + " current_time: " + arr[2] + "\n"
+                        + " current_timestamp: " + arr[3]
         ));
     }
 
