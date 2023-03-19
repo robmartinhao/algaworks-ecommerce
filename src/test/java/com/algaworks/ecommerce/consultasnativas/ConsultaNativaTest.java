@@ -10,6 +10,22 @@ import java.util.List;
 public class ConsultaNativaTest extends EntityManagerTest {
 
     @Test
+    public void passarParamentros() {
+        String sql = "select prd_id id , prd_nome nome, prd_descricao descricao, " +
+                "prd_data_criacao data_criacao, prd_data_ultima_atualizacao data_ultima_atualizacao, " +
+                "prd_preco preco, prd_foto foto " +
+                "from ecm_produto where prd_id = :id";
+        Query nativeQuery = entityManager.createNativeQuery(sql, Produto.class);
+        nativeQuery.setParameter("id", 201);
+
+        List<Produto> lista = nativeQuery.getResultList();
+
+        lista.stream().forEach(obj -> System.out.println(
+                String.format("Produto => ID: %s, Nome: %s", obj.getId(), obj.getNome())
+        ));
+    }
+
+    @Test
     public void executarSQLRetornandoEntidade03() {
         String sql = "select id , nome, descricao, " +
                 "null data_criacao, null data_ultima_atualizacao, " +
