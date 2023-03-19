@@ -11,6 +11,10 @@ import java.util.List;
 
 @Getter
 @Setter
+@SqlResultSetMappings({
+        @SqlResultSetMapping(name = "produto_loja.Produto",
+                entities = { @EntityResult(entityClass = Produto.class) })
+})
 @EntityListeners(GenericoListener.class)
 @Entity
 @Table(name = "produto",

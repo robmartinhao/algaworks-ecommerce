@@ -9,6 +9,10 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SqlResultSetMappings({
+        @SqlResultSetMapping(name = "item_pedido-produto.ItemPedido-Produto",
+                entities = { @EntityResult(entityClass = ItemPedido.class), @EntityResult(entityClass = Produto.class) })
+})
 @Getter
 @Setter
 @Entity
