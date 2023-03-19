@@ -26,3 +26,11 @@ drop table if exists produto;
 drop table if exists produto_atributo;
 drop table if exists produto_categoria;
 drop table if exists produto_tag;
+
+drop table if exists produto_loja;
+
+drop table if exists ecm_produto;
+
+drop table if exists erp_produto;
+
+drop function if exists acima_media_faturamento;

@@ -33,3 +33,11 @@ alter table produto_atributo add constraint fk_produto_atributo_produto foreign 
 alter table produto_categoria add constraint fk_produto_categoria_categoria foreign key (categoria_id) references categoria (id);
 alter table produto_categoria add constraint fk_produto_categoria_produto foreign key (produto_id) references produto (id);
 alter table produto_tag add constraint fk_produto_tag_produto foreign key (produto_id) references produto (id);
+
+create table produto_loja (id integer not null auto_increment, nome varchar(100), descricao longtext, preco decimal(19, 2), data_criacao datetime(6), data_ultima_atualizacao datetime(6), foto longblob, primary key (id)) engine=InnoDB;
+
+create table ecm_produto (prd_id integer not null auto_increment, prd_nome varchar(100), prd_descricao longtext, prd_preco decimal(19, 2), prd_data_criacao datetime(6), prd_data_ultima_atualizacao datetime(6), prd_foto longblob, primary key (prd_id)) engine=InnoDB;
+
+create table erp_produto (id integer not null auto_increment, nome varchar(100), descricao longtext, preco decimal(19, 2), primary key (id)) engine=InnoDB;
+
+create function acima_media_faturamento(valor double) returns boolean reads sql data return valor > (select avg(total) from pedido);
