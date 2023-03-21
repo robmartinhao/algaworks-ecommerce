@@ -1,6 +1,7 @@
 package com.algaworks.ecommerce.consultasnativas;
 
 import com.algaworks.ecommerce.EntityManagerTest;
+import com.algaworks.ecommerce.dto.CategoriaDTO;
 import com.algaworks.ecommerce.dto.ProdutoDTO;
 import com.algaworks.ecommerce.model.Categoria;
 import com.algaworks.ecommerce.model.ItemPedido;
@@ -11,6 +12,16 @@ import org.junit.Test;
 import java.util.List;
 
 public class ConsultaNativaTest extends EntityManagerTest {
+
+    @Test
+    public void mapearConsultaParaDTOEmArquivoExterno() {
+        Query nativeQuery = entityManager.createNamedQuery("ecm_categoria.listar.dto");
+        List<CategoriaDTO> lista = nativeQuery.getResultList();
+
+        lista.stream().forEach(obj -> System.out.println(
+                String.format("CategoriaDTO => ID: %s, Nome: %s", obj.getId(), obj.getNome())
+        ));
+    }
 
     @Test
     public void usarArquivoXML() {
