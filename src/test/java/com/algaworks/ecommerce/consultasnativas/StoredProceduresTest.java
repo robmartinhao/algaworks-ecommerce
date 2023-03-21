@@ -7,9 +7,31 @@ import jakarta.persistence.StoredProcedureQuery;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class StoredProceduresTest extends EntityManagerTest {
+
+    @Test
+    public void atualizarPrecoProdutoExercicio() {
+        StoredProcedureQuery storedProcedureQuery = entityManager
+                .createStoredProcedureQuery("ajustar_preco_produto");
+
+        storedProcedureQuery.registerStoredProcedureParameter(
+                "produto_id", Integer.class, ParameterMode.IN);
+        storedProcedureQuery.registerStoredProcedureParameter(
+                "percentual_ajuste", BigDecimal.class, ParameterMode.IN);
+
+        storedProcedureQuery.registerStoredProcedureParameter(
+                "preco_ajustado", BigDecimal.class, ParameterMode.OUT);
+
+        storedProcedureQuery.setParameter("produto_id", 1);
+        storedProcedureQuery.setParameter("percentual_ajuste", new BigDecimal(10));
+
+        BigDecimal precoAjustado = (BigDecimal) storedProcedureQuery.getOutputParameterValue("preco_ajustado");
+
+        Assert.assertEquals(new BigDecimal("8789.0"), precoAjustado);
+    }
 
     @Test
     public void receberListaDaProcedure() {
