@@ -2,6 +2,7 @@ package com.algaworks.ecommerce.consultasnativas;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.dto.ProdutoDTO;
+import com.algaworks.ecommerce.model.Categoria;
 import com.algaworks.ecommerce.model.ItemPedido;
 import com.algaworks.ecommerce.model.Produto;
 import jakarta.persistence.Query;
@@ -12,8 +13,17 @@ import java.util.List;
 public class ConsultaNativaTest extends EntityManagerTest {
 
     @Test
+    public void usarArquivoXML() {
+        Query nativeQuery = entityManager.createNamedQuery("ecm_categoria.listar");
+        List<Categoria> lista = nativeQuery.getResultList();
+
+        lista.stream().forEach(obj -> System.out.println(
+                String.format("categoria => ID: %s, Nome: %s", obj.getId(), obj.getNome())
+        ));
+    }
+
+    @Test
     public void usarUmaNamedNativeQuery02() {
-        String sql = "";
         Query nativeQuery = entityManager.createNamedQuery("ecm_produto.listar");
         List<Produto> lista = nativeQuery.getResultList();
 

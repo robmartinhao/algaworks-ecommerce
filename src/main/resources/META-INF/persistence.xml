@@ -6,6 +6,7 @@
     <persistence-unit name="Ecommerce-PU">
         <mapping-file>META-INF/consultas/pedidos.xml</mapping-file>
         <mapping-file>META-INF/consultas/produtos.xml</mapping-file>
+        <mapping-file>META-INF/consultas/categoria.xml</mapping-file>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:mysql://localhost/algaworks_ecommerce?createDatabaseIfNotExist=true&amp;useTimezone=true&amp;serverTimezone=UTC" />
