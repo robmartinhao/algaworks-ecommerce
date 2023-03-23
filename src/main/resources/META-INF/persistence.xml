@@ -17,8 +17,8 @@
             <property name="hibernate.hiraki.maximumPoolSize" value="8"/>
             <property name="hibernate.connection.provider_class" value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
 
-<!--            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>-->
-            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+<!--            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>-->
 
             <property name="jakarta.persistence.schema-generation.create-source" value="metadata-then-script"/>
             <property name="jakarta.persistence.schema-generation.drop-source" value="metadata-then-script"/>
