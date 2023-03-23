@@ -36,5 +36,8 @@ public class CacheTest {
         System.out.println("Buscando a partir da instância 1:");
         Pedido pedido2 = entityManager1.find(Pedido.class, 1);
         System.out.println(pedido2.getId() + " - " + pedido2.getTotal());
+
+        entityManager1.close();
+        entityManager2.close();
     }
 }
