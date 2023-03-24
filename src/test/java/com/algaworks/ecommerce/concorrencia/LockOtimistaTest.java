@@ -65,7 +65,7 @@ public class LockOtimistaTest {
             log("Runnable 02 vai carregar o produto 1.");
             Produto produto = entityManager2.find(Produto.class, 1);
 
-            log("Runnable 02 vai esperar por 1 segundos.");
+            log("Runnable 02 vai esperar por 1 segundo.");
             esperar(1);
 
             log("Runnable 02 vai alterar o produto.");
