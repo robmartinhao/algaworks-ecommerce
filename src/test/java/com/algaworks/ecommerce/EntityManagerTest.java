@@ -1,28 +1,13 @@
 package com.algaworks.ecommerce;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 
-public class EntityManagerTest {
+public class EntityManagerTest extends EntityManagerFactoryTest {
 
-    protected static EntityManagerFactory entityManagerFactory;
 
     protected static EntityManager entityManager;
-
-    @BeforeClass
-    public static void setUpBeforeClass() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("Ecommerce-PU");
-    }
-
-    @AfterClass
-    public static void tearDownAfterClass() {
-        entityManagerFactory.close();
-    }
 
     @Before
     public void setUp() {
@@ -33,5 +18,4 @@ public class EntityManagerTest {
     public void tearDown() {
         entityManager.close();
     }
-
 }
